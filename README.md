@@ -9,6 +9,7 @@ This unofficial patch makes Axis & Allies RTS (2004, TimeGate Studios) playable 
 
 | File | Purpose |
 |------|---------|
+| `/assets/` | Shows screenshots of before/after (proof it works) |
 | `Data.rwd` | Patched game archive with font fix applied |
 | `setup.sh` | Automated setup script |
 | `README.md` | This file |
@@ -26,8 +27,22 @@ This unofficial patch makes Axis & Allies RTS (2004, TimeGate Studios) playable 
 
 ## Installation
 
-1. Extract your copy of Axis & Allies RTS to a folder, e.g. `~/Documents/AxisAlliesRTS`
-2. Copy the contents of this patch zip into the same folder
+Before you do anything, you'll likely see this when you try to run the game initially with wine:
+
+![Initial Error Screenshot.](/assets/initial-error.png)
+
+When launching AA.exe without proper execution context, Wine may start the game without the correct working directory. This causes the game to fail initialization with the error:
+
+![Allow to Execute Screenshot.](/assets/allow-execute.png)
+
+This occurs because the game relies on relative paths for required data directories. Ensuring the executable is launched with correct permissions and from the proper directory resolves this issue. Now when you run the game, you won't get that initial error, but now you'll see the game behaves as-so, where there is no text on any buttons:
+
+![No Button Text Screenshot.](/assets/AA-notext.png)
+
+As you can see, no text are on the buttons, that's where this patch comes into hand:
+
+1. Extract your copy of Axis & Allies RTS to a folder, e.g. `~/Documents/AxisAlliesRTS` (I assume you have already done this)
+2. Copy the `setup.sh` of this patch zip into the same folder
 3. Open a terminal in that folder and run:
 
 ```bash
@@ -35,8 +50,15 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-4. Follow the prompts — the script will ask for your game folder path
-5. Launch from your applications menu or run `launch.sh` directly
+4. Or you can do the same steps I mentioned earlier on the bash script, and click allow to execute as program checkbox, then double click the bash script, and select Run in Terminal
+5. Follow the prompts — the script will ask for your game folder path (i.e. `~/Documents/AxisAlliesRTS`) -- Make sure there is no Ampersand (&) symbol in the name!!!
+6. Download the Data.rwd from the Releases on this github repo, over on the sidebar to the right.
+7. Move the `Data.rwd` file into your game's directory (don't worry the bash script backed-up the original `Data.rwd` as `Data.rwd.bak` so yes, you can click the replace button when Linux tells you the file already exists in that directory.
+7. Launch from your applications menu or run `launch.sh` directly
+
+Now the game should work as so:
+
+![Fixed Button Text Screenshot.](/assets/AA-fixtext.png)
 
 ---
 
