@@ -1,5 +1,5 @@
 # Axis & Allies RTS — Linux Compatibility Patch
-**By jShum00** | Tested on Ubuntu 24 with Wine 9.0
+**By jShum00** | Tested on Linux Mint 22.2 x86_64 with Wine 9.0
 
 This unofficial patch makes Axis & Allies RTS (2004, TimeGate Studios) playable on Linux via Wine with no missing button text, no crashes, and a working HUD.
 
@@ -21,7 +21,7 @@ This unofficial patch makes Axis & Allies RTS (2004, TimeGate Studios) playable 
 - A copy of **Axis & Allies RTS** (available on MyAbandonware and similar sites)
 - **Wine 9.0+** (`sudo apt install wine`)
 - **wine32** (`sudo apt install wine32`)
-- Linux with a desktop environment (tested on Ubuntu 24 / XFCE)
+- Linux with a desktop environment (tested on Linux Mint 22.2 x86_64 / Cinnamon)
 
 ---
 
