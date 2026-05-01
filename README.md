@@ -27,38 +27,69 @@ This unofficial patch makes Axis & Allies RTS (2004, TimeGate Studios) playable 
 
 ## Installation
 
-Before you do anything, you'll likely see this when you try to run the game initially with wine:
+This guide assumes you already have a working installation of Axis & Allies RTS (for example from a backup, disc rip, MyAbandonware, or similar source). The goal is to run the existing Windows installation under Wine on Linux.
+
+### 1. First launch issue (working directory error)
+
+When launching `AA.exe` through Wine, you may encounter this error:
 
 ![Initial Error Screenshot.](/assets/initial-error.png)
 
-When launching AA.exe without proper execution context, Wine may start the game without the correct working directory. This causes the game to fail initialization with the error:
+This occurs because the game expects to be launched from its current directory. But for some reason if the Linux doesn't mark the exe as executable, then it thinks it's in a different environment. So you get this message:
+
+`Work depot not specified`
+
+### 2. Launch context behavior
+
+Depending on how the executable is started (terminal, file manager, or Wine integration), the working directory may differ.
+
+If launched from a file manager, you may see an option like:
 
 ![Allow to Execute Screenshot.](/assets/allow-execute.png)
 
-This occurs because the game relies on relative paths for required data directories. Ensuring the executable is launched with correct permissions and from the proper directory resolves this issue. Now when you run the game, you won't get that initial error, but now you'll see the game behaves as-so, where there is no text on any buttons:
+This affects how the executable is invoked and can influence whether the correct working directory is used.
+
+### 3. Missing UI text issue (after successful launch)
+
+If the game launches successfully, you may notice that all button text is missing:
 
 ![No Button Text Screenshot.](/assets/AA-notext.png)
 
-As you can see, no text are on the buttons, that's where this patch comes into hand:
+This is caused by a font reference issue inside the game’s data files when running under Wine.
 
-1. Extract your copy of Axis & Allies RTS to a folder, e.g. `~/Documents/AxisAlliesRTS` (I assume you have already done this)
-2. Copy the `setup.sh` of this patch zip into the same folder
-3. Open a terminal in that folder and run:
+### 4. Applying the patch
+
+To resolve these issues:
+
+1. Locate your existing Axis & Allies RTS installation  
+   Example: `~/Documents/AxisAlliesRTS`
+
+2. Copy `setup.sh` from this repository into that folder
+
+3. Open a terminal in that directory and run:
 
 ```bash
 chmod +x setup.sh
 ./setup.sh
 ```
+4. Alternatively:
+   - Right-click setup.sh
+   - Enable “Allow executing file as program”
+   - Run it using “Run in Terminal”
 
-4. Or you can do the same steps I mentioned earlier on the bash script, and click allow to execute as program checkbox, then double click the bash script, and select Run in Terminal
-5. Follow the prompts — the script will ask for your game folder path (i.e. `~/Documents/AxisAlliesRTS`) -- Make sure there is no Ampersand (&) symbol in the name!!!
-6. Download the Data.rwd from the Releases on this github repo, over on the sidebar to the right.
-7. Move the `Data.rwd` file into your game's directory (don't worry the bash script backed-up the original `Data.rwd` as `Data.rwd.bak` so yes, you can click the replace button when Linux tells you the file already exists in that directory.
-7. Launch from your applications menu or run `launch.sh` directly
+5. Enter your game directory when prompted
 
-Now the game should work as so:
+> Important: Avoid using & in folder names, as it can interfere with command parsing.
 
-![Fixed Button Text Screenshot.](/assets/AA-fixtext.png)
+6. Download Data.rwd from the Releases section of this repository
+7. Place Data.rwd into the game directory
+(The original file will already be backed up as Data.rwd.bak)
+
+### 5. Successful result
+
+After applying the patch, the game should launch with fully visible UI text:
+
+![Fixed Button Text Screenshot](/assets/AA-fixtext.png)
 
 ---
 
